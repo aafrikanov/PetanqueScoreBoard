@@ -1,0 +1,64 @@
+.widget-panel {
+  width: 560px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+}
+
+.widget-row {
+  display: flex;
+  align-items: center;
+  background: #1e3a5f;
+  color: #fff;
+  min-height: 64px;
+  border-bottom: 1px solid #2d4a6f;
+}
+
+.widget-row:last-child {
+  border-bottom: none;
+}
+
+.widget-team-name {
+  flex: 1;
+  min-width: 0;
+  padding: 0 1rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.widget-balls {
+  flex: 0 0 auto;
+  display: flex;
+  gap: 8px;
+  padding: 0 1rem;
+}
+
+.widget-ball {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #3d5a80;
+  flex-shrink: 0;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.widget-ball.active {
+  background: #fff;
+  border-color: #fff;
+}
+
+.widget-score {
+  flex: 0 0 56px;
+  height: 100%;
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  color: #1e3a5f;
+  font-size: 1.5rem;
+  font-weight: 700;
+  border-left: 1px solid #2d4a6f;
+}

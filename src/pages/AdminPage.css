@@ -1,0 +1,122 @@
+.admin-page {
+  max-width: 400px;
+  min-width: 0;
+  margin: 0 auto;
+  padding: 3.5rem 1rem 2rem;
+}
+
+.admin-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.admin-header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.admin-link {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.admin-link:hover {
+  text-decoration: underline;
+}
+
+.admin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.admin-team {
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.25rem;
+  background: #fff;
+}
+
+.admin-team legend {
+  font-weight: 600;
+  color: #334155;
+  padding: 0 0.5rem;
+}
+
+.admin-team label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  color: #64748b;
+}
+
+.admin-team label:first-of-type {
+  margin-top: 0;
+}
+
+.admin-team input[type='text'] {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.admin-team input[type='number'] {
+  width: 80px;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.admin-balls-control {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.admin-btn {
+  padding: 0.4rem 0.75rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: #f8fafc;
+  color: #334155;
+  cursor: pointer;
+  min-width: 2.5rem;
+}
+
+.admin-btn:hover:not(:disabled) {
+  background: #e2e8f0;
+}
+
+.admin-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.admin-btn-reset {
+  min-width: auto;
+}
+
+.admin-value {
+  min-width: 1.5rem;
+  text-align: center;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.admin-hint {
+  margin-top: 2rem;
+  font-size: 0.8125rem;
+  color: #64748b;
+  line-height: 1.5;
+}
