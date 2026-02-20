@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import "./AdminPage.css";
 
 function clampBalls(v: number) {
-  return Math.min(6, Math.max(1, Math.round(v)));
+  return Math.min(6, Math.max(0, Math.round(v)));
 }
 function clampScore(v: number) {
   return Math.min(13, Math.max(0, Math.round(v)));
@@ -29,12 +29,12 @@ function TeamForm({
           value={team.name}
           onChange={(e) => onChange({ ...team, name: e.target.value })}
           maxLength={24}
-          placeholder="ARLANC"
+          placeholder=""
         />
       </label>
       <label>
-        Шары
         <div className="admin-balls-control">
+          <div className="admin-team-row-title">Шары</div>
           <button
             type="button"
             className="admin-btn admin-btn-reset"
@@ -48,7 +48,7 @@ function TeamForm({
             onClick={() =>
               onChange({ ...team, balls: clampBalls(team.balls - 1) })
             }
-            disabled={team.balls <= 1}
+            disabled={team.balls <= 0}
           >
             −
           </button>
@@ -66,8 +66,8 @@ function TeamForm({
         </div>
       </label>
       <label>
-        Счёт
         <div className="admin-balls-control">
+          <div className="admin-team-row-title">Счёт</div>
           <button
             type="button"
             className="admin-btn admin-btn-reset"
@@ -109,15 +109,42 @@ export function AdminPage() {
     setScore((prev: ScoreState) => ({ ...prev, [key]: team }));
   };
 
+  const newGame = () => {
+    setScore((prev: ScoreState) => ({
+      team1: { ...prev.team1, score: 0, balls: 6 },
+      team2: { ...prev.team2, score: 0, balls: 6 },
+    }));
+  };
+
+  const newSet = () => {
+    setScore((prev: ScoreState) => ({
+      team1: { ...prev.team1, balls: 6 },
+      team2: { ...prev.team2, balls: 6 },
+    }));
+  };
+
   return (
     <div className="admin-page">
       <header className="admin-header">
         <h1>Управление счётом</h1>
-        <Link to="/widget" className="admin-link">
-          Открыть виджет →
-        </Link>
       </header>
       <div className="admin-form">
+        <div className="admin-quick-actions">
+          <button
+            type="button"
+            className="admin-btn admin-btn-action"
+            onClick={newGame}
+          >
+            Новая игра
+          </button>
+          <button
+            type="button"
+            className="admin-btn admin-btn-action"
+            onClick={newSet}
+          >
+            Новый гейм
+          </button>
+        </div>
         <TeamForm
           label="Команда 1"
           team={score.team1}

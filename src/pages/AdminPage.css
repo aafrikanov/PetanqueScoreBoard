@@ -35,6 +35,18 @@
   gap: 2rem;
 }
 
+.admin-quick-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.admin-btn-action {
+  min-width: auto;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+}
+
 .admin-team {
   border: 1px solid #e2e8f0;
   border-radius: 12px;
@@ -46,6 +58,13 @@
   font-weight: 600;
   color: #334155;
   padding: 0 0.5rem;
+}
+
+.admin-team-row-title {
+  font-weight: 600;
+  color: #334155;
+  width: 4rem;
+  flex-shrink: 0;
 }
 
 .admin-team label {
@@ -108,9 +127,10 @@
 }
 
 .admin-value {
-  min-width: 1.5rem;
+  min-width: 2rem;
   text-align: center;
   font-weight: 600;
+  font-size: 1.5rem;
   color: #1e293b;
 }
 
