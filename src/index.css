@@ -24,12 +24,18 @@ body {
   padding: 2rem;
 }
 
+html.widget-embed,
+body.widget-embed {
+  background: transparent !important;
+}
+
 /* Встраиваемый виджет: размер по панели, без отступов */
 body.widget-embed #root {
   padding: 0;
   margin: 0;
   max-width: none;
   display: inline-block;
+  background: transparent;
 }
 
 h1 {

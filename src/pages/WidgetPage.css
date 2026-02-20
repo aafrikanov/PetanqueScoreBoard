@@ -60,9 +60,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #fff;
-  color: #1e3a5f;
   font-size: 1.5rem;
   font-weight: 700;
   border-left: 1px solid #2d4a6f;
+}
+
+.widget-row:first-child .widget-score {
+  background: #c0392b;
+  color: #fff;
+}
+
+.widget-row:last-child .widget-score {
+  background: #1e3a5f;
+  color: #fff;
 }
