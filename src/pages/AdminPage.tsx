@@ -188,7 +188,7 @@ export function AdminPage() {
               className="admin-btn admin-btn-action"
               onClick={() => setTimer({ togglePause: true })}
             >
-              {timer.isPaused ? "Пауза" : "Старт"}
+              {timer.isPaused ? "Старт" : "Пауза"}
             </button>
           </div>
         </fieldset>
