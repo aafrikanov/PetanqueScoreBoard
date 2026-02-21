@@ -134,6 +134,19 @@
   color: #1e293b;
 }
 
+.admin-timer-display {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 0.75rem;
+}
+
+.admin-timer-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
 .admin-hint {
   margin-top: 2rem;
   font-size: 0.8125rem;

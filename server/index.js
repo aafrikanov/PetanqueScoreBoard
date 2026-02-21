@@ -13,7 +13,30 @@ const DEFAULT_SCORE = {
   team2: { name: 'ST-TROPEZ', balls: 2, score: 0 },
 }
 
+const TIMER_INITIAL = 60
+
 let scoreState = { ...JSON.parse(JSON.stringify(DEFAULT_SCORE)) }
+
+let timerState = {
+  secondsLeft: TIMER_INITIAL,
+  isPaused: true,
+}
+let timerInterval = null
+
+function startTimerTick() {
+  if (timerInterval) return
+  timerInterval = setInterval(() => {
+    if (timerState.isPaused || timerState.secondsLeft <= 0) return
+    timerState = { ...timerState, secondsLeft: Math.max(0, timerState.secondsLeft - 1) }
+  }, 1000)
+}
+
+function stopTimerTick() {
+  if (timerInterval) {
+    clearInterval(timerInterval)
+    timerInterval = null
+  }
+}
 
 const app = express()
 app.use(cors())
@@ -34,6 +57,36 @@ app.put('/api/score', (req, res) => {
   } else {
     res.status(400).json({ error: 'Invalid score state' })
   }
+})
+
+app.get('/api/timer', (_req, res) => {
+  res.json(timerState)
+})
+
+app.put('/api/timer', (req, res) => {
+  const body = req.body || {}
+  if (body.reset === true) {
+    timerState = { secondsLeft: TIMER_INITIAL, isPaused: false }
+    startTimerTick()
+    return res.json(timerState)
+  }
+  if (body.togglePause === true) {
+    timerState = { ...timerState, isPaused: !timerState.isPaused }
+    if (timerState.isPaused) stopTimerTick()
+    else if (timerState.secondsLeft > 0) startTimerTick()
+    return res.json(timerState)
+  }
+  if (typeof body.secondsLeft === 'number') {
+    timerState = { ...timerState, secondsLeft: Math.max(0, Math.min(60, Math.round(body.secondsLeft))) }
+  }
+  if (typeof body.isPaused === 'boolean') {
+    timerState = { ...timerState, isPaused: body.isPaused }
+    if (timerState.isPaused) stopTimerTick()
+    else if (timerState.secondsLeft > 0) startTimerTick()
+  }
+  if (!timerState.isPaused && timerState.secondsLeft > 0) startTimerTick()
+  else stopTimerTick()
+  res.json(timerState)
 })
 
 const PORT = Number(process.env.PORT) || 3001

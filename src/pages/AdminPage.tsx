@@ -1,6 +1,7 @@
+import { useEffect } from "react";
 import { useScore } from "../context/ScoreContext";
+import { useTimer } from "../context/TimerContext";
 import type { ScoreState, TeamScore } from "../types/score";
-import { Link } from "react-router-dom";
 import "./AdminPage.css";
 
 function clampBalls(v: number) {
@@ -102,8 +103,16 @@ function TeamForm({
   );
 }
 
+const TIMER_POLL_MS = 1000;
+
 export function AdminPage() {
   const { score, setScore } = useScore();
+  const { timer, setTimer, refreshTimer } = useTimer();
+
+  useEffect(() => {
+    const id = setInterval(refreshTimer, TIMER_POLL_MS);
+    return () => clearInterval(id);
+  }, [refreshTimer]);
 
   const update = (key: "team1" | "team2", team: TeamScore) => {
     setScore((prev: ScoreState) => ({ ...prev, [key]: team }));
@@ -155,6 +164,29 @@ export function AdminPage() {
           team={score.team2}
           onChange={(t) => update("team2", t)}
         />
+        <fieldset className="admin-team admin-timer">
+          <legend>Таймер (60 сек)</legend>
+          <div className="admin-timer-display">
+            {Math.max(0, Math.floor(timer.secondsLeft))} сек
+            {timer.isPaused && " (пауза)"}
+          </div>
+          <div className="admin-timer-actions">
+            <button
+              type="button"
+              className="admin-btn admin-btn-action"
+              onClick={() => setTimer({ reset: true })}
+            >
+              Сбросить
+            </button>
+            <button
+              type="button"
+              className="admin-btn admin-btn-action"
+              onClick={() => setTimer({ togglePause: true })}
+            >
+              {timer.isPaused ? "Пауза" : "Старт"}
+            </button>
+          </div>
+        </fieldset>
       </div>
       <p className="admin-hint">
         Изменения сохраняются автоматически и отображаются на странице виджета
