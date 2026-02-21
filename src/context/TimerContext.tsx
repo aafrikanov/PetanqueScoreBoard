@@ -10,7 +10,11 @@ import { fetchTimer, putTimer } from '../api/timer'
 
 type TimerContextValue = {
   timer: TimerState
-  setTimer: (updates: { reset?: boolean; togglePause?: boolean }) => void
+  setTimer: (updates: {
+    reset?: boolean
+    togglePause?: boolean
+    isPaused?: boolean
+  }) => void
   refreshTimer: () => void
   error: Error | null
   isLoading: boolean
@@ -42,7 +46,11 @@ export function TimerProvider({ children }: { children: React.ReactNode }) {
   }, [load])
 
   const setTimer = useCallback(
-    (updates: { reset?: boolean; togglePause?: boolean }) => {
+    (updates: {
+      reset?: boolean
+      togglePause?: boolean
+      isPaused?: boolean
+    }) => {
       putTimer(updates).then(
         (next) => setTimerState(next),
         (e) => setError(e instanceof Error ? e : new Error('Unknown error'))

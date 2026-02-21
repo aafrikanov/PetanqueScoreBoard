@@ -115,6 +115,10 @@ export function AdminPage() {
   }, [refreshTimer]);
 
   const update = (key: "team1" | "team2", team: TeamScore) => {
+    const prevTeam = key === "team1" ? score.team1 : score.team2;
+    if (team.balls < prevTeam.balls) {
+      setTimer({ reset: true });
+    }
     setScore((prev: ScoreState) => ({ ...prev, [key]: team }));
   };
 
@@ -126,6 +130,7 @@ export function AdminPage() {
   };
 
   const newSet = () => {
+    setTimer({ reset: true, isPaused: true });
     setScore((prev: ScoreState) => ({
       team1: { ...prev.team1, balls: 6 },
       team2: { ...prev.team2, balls: 6 },

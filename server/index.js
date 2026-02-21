@@ -66,8 +66,10 @@ app.get('/api/timer', (_req, res) => {
 app.put('/api/timer', (req, res) => {
   const body = req.body || {}
   if (body.reset === true) {
-    timerState = { secondsLeft: TIMER_INITIAL, isPaused: false }
-    startTimerTick()
+    const paused = body.isPaused === true
+    timerState = { secondsLeft: TIMER_INITIAL, isPaused: paused }
+    if (paused) stopTimerTick()
+    else startTimerTick()
     return res.json(timerState)
   }
   if (body.togglePause === true) {
